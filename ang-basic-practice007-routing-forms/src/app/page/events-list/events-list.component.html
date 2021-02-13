@@ -16,6 +16,13 @@
         <td>{{event.date}} </td>
         <td>{{event.time}}</td>
         <td>{{event.location.address}}, {{event.location.city}}, {{event.location.country}}</td>
+        <td>
+          <div class="btn-group">
+            <button [routerLink]="[event.id]" class="btn btn-primary">
+              <i class="fa fa-edit"></i>
+            </button>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

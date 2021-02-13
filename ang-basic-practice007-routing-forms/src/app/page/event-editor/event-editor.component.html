@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-6 offset-2">
+        <form #eventFrom="ngForm">
+            <div class="form-group">
+                <label>ID</label>
+                <input [(ngModel)]="eventItem.id" type="number" name="id" value="event.id" class="form-control"
+                    pattern=".{1,}" required>
+                <div [hidden]="eventFrom.controls.id?.valid" class="error-message">
+                    Az ID nem lehet üres!
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" [(ngModel)]="eventItem.name" class="form-control" pattern=".{8,}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="date" [(ngModel)]="eventItem.date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <input type="time" name="time" [(ngModel)]="eventItem.time" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" name="location" [(ngModel)]="eventItem.location" class="form-control" required>
+            </div>
+            <button [disabled]="eventFrom.invalid" class="btn btn-success">
+                <i class="fa fa-save"></i>
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Event } from 'src/app/model/event';
 import { EventService } from 'src/app/service/event.service';
@@ -17,6 +19,6 @@ export class EventsListComponent implements OnInit {
     private eventService: EventService,
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 }
