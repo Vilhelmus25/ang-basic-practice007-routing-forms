@@ -20,10 +20,9 @@ export class EventEditorComponent implements OnInit {
 
     activatedRoute.params.subscribe(
       params => {
-        this.eventService.get(params.id).forEach(
+        this.eventService.get(parseInt(params.id)).forEach(
           eventItem => {
-            this.eventItem = eventItem;
-            console.log(this.eventItem);
+            this.eventItem = eventItem || new Event();
           }
         )
       }
@@ -34,7 +33,9 @@ export class EventEditorComponent implements OnInit {
 
   }
   onFormSubmit(form: NgForm): void {
-    console.log(form.value);
+    const event: Event = form.value;
+    console.log('NgForm: ', event, 'eventItem: ', this.eventItem);
+    this.eventService.update(this.eventItem);
   }
 
 }

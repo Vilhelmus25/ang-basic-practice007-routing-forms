@@ -11,28 +11,28 @@ export class EventService {
     {
       id: 1,
       name: 'Angular Connect',
-      date: '9/26/2036',
+      date: '09/26/2036',
       time: '10am',
       location: { address: '1 London Rd', city: 'London', country: 'England' }
     },
     {
       id: 2,
       name: 'ng-nl',
-      date: '4/15/2037',
+      date: '04/15/2037',
       time: '9am',
       location: { address: '127 DT ', city: 'Amsterdam', country: 'NL' }
     },
     {
       id: 3,
       name: 'ng-conf 2037',
-      date: '4/15/2037',
+      date: '04/15/2037',
       time: '9am',
       location: { address: 'The Palatial America Hotel', city: 'Salt Lake City', country: 'USA' }
     },
     {
       id: 4,
       name: 'UN Angular Summit',
-      date: '6/10/2037',
+      date: '06/10/2037',
       time: '8am',
       location: { address: 'The UN Angular Center', city: 'New York', country: 'USA' }
     },
@@ -40,14 +40,17 @@ export class EventService {
 
   list$: BehaviorSubject<Event[]> = new BehaviorSubject<Event[]>(this.list);
 
-  constructor() { }
+  constructor() {
+
+  }
 
   getAll(): void {
     this.list$.next(this.list);
+    console.log(this.list$);
   }
 
   get(id: number): Observable<Event> {
-    const ev: Event | undefined = this.list.find( item => item.id === id );
+    const ev: Event | undefined = this.list.find(item => item.id === id);
     if (ev) {
       return of(ev);
     }
@@ -56,8 +59,9 @@ export class EventService {
   }
 
   update(event: Event): void {
-    const index: number = this.list.findIndex( item => item.id === event.id );
+    const index: number = this.list.findIndex(item => item.id === event.id);
     this.list.splice(index, 1, event);
+    //console.log(event);
     this.getAll();
   }
 }

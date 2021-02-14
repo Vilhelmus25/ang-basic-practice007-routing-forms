@@ -1,30 +1,50 @@
 <div class="row">
-    <div class="col-6 offset-2">
-        <form #eventFrom="ngForm">
+    <div class="col-8 offset-2">
+        <form #eventFrom="ngForm" (ngSubmit)="onFormSubmit(eventFrom)">
             <div class="form-group">
                 <label>ID</label>
-                <input [(ngModel)]="eventItem.id" type="number" name="id" value="event.id" class="form-control"
-                    pattern=".{1,}" required>
-                <div [hidden]="eventFrom.controls.id?.valid" class="error-message">
-                    Az ID nem lehet üres!
-                </div>
+                <input type="text" name="id" [(ngModel)]="eventItem.id" class="form-control" #id="ngModel" required>
             </div>
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" [(ngModel)]="eventItem.name" class="form-control" pattern=".{8,}"
-                    required>
+                    #name="ngModel" required>
+                <div [hidden]="eventFrom.controls.name?.valid || name.pristine" class="error-message">
+                    The Name must be at least 8 characters!
+                </div>
             </div>
             <div class="form-group">
                 <label>Date</label>
-                <input type="date" name="date" [(ngModel)]="eventItem.date" class="form-control" required>
+                <input type="text" name="date" [(ngModel)]="eventItem.date" class="form-control"
+                    pattern="^(((0)[0-9])|((1)[0-2]))(\/)([0-2][0-9]|(3)[0-1])(\/)\d{4}$" #date="ngModel" required>
+                <div [hidden]="eventFrom.controls.date?.valid" class="error-message">
+                    The Date must follow the MM/DD/YYYY form!
+                </div>
             </div>
             <div class="form-group">
                 <label>Time</label>
-                <input type="time" name="time" [(ngModel)]="eventItem.time" class="form-control" required>
+                <input type="text" name="time" [(ngModel)]="eventItem.time" class="form-control"
+                    pattern="([0-9]|(1)[0-2])((am)|(pm))" #time="ngModel" required>
+                <div [hidden]="eventFrom.controls.time?.valid " class="error-message">
+                    The Time must follow the 0-12am|pm form!
+                </div>
             </div>
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" name="location" [(ngModel)]="eventItem.location" class="form-control" required>
+            <div class="row form-group">
+                <div class="col-6">
+                    <label>LocationAddress</label>
+                    <input type="text" name="location.address" [(ngModel)]="eventItem.location.address"
+                        class="form-control" #location.address="ngModel" required>
+                </div>
+                <div class="col-3">
+                    <label>LocationCity</label>
+                    <input type="text" name="location.city" [(ngModel)]="eventItem.location.city" class="form-control"
+                        #location.city="ngModel" required>
+                </div>
+                <div class="col-3">
+                    <label>LocationCountry</label>
+                    <input type="text" name="location.country" [(ngModel)]="eventItem.location.country"
+                        class="form-control" #location.country="ngModel" required>
+                </div>
             </div>
             <button [disabled]="eventFrom.invalid" class="btn btn-success">
                 <i class="fa fa-save"></i>
